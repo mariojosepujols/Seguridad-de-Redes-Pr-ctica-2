@@ -1,4 +1,4 @@
-# Seguridad-de-Redes-Pr-ctica-2
+# Seguridad-de-Redes-Práctica-2
 
 ## Video demostrativo
 
