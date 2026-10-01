@@ -105,8 +105,23 @@ El traceroute llegó a `10.14.53.130` en tres saltos.
 
 **Resultado:** el destino fue alcanzado. La dirección WAN del Site 2 aparece como segundo salto.
 
+**Prueba con las rutas estáticas VPN deshabilitadas**
+
+Se deshabilitaron las rutas estáticas de las redes VPN en ambos FortiGate. La captura de la tabla de rutas de Site 2 muestra deshabilitadas la ruta por la interfaz VPN y la ruta blackhole hacia el objeto remoto; la ruta por defecto mediante port1 permanece habilitada.
+
+
+Desde el Ubuntu Desktop se realizaron nuevas pruebas hacia 10.14.53.130:
+
+- HTTPS: Firefox muestra https://10.14.53.130 y el mensaje “The connection has timed out”.
+- Traceroute: los saltos muestran * * *, sin respuestas de los routers ni del destino.
+- Ping: 18 paquetes transmitidos, 0 recibidos y 100 % de pérdida.
+
+
+al retirar las rutas que llevan a la red remota por la VPN, el Site 1 no alcanza la página web del Site 2. Esto demuestra que las rutas VPN son necesarias para el acceso entre las LAN.
 
 ## Conclusión
 
 Las capturas muestran que el túnel IPsec está activo y que el cliente alcanza el servidor `10.14.53.130`: el ping recibe respuestas, Firefox carga la página de Apache y el traceroute llega al destino en tres saltos. Las políticas entre los sitios muestran NAT desactivado.
 
+
+La infraestructura presenta conectividad entre el usuario del Site 1 y el servidor 10.14.53.130 del Site 2. Los FortiGate muestran el túnel activo, políticas de aceptación sin NAT para la VPN y rutas hacia el sitio remoto. Las pruebas confirman respuestas ICMP, carga de la página Apache y llegada del traceroute en tres saltos.
